@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>林子卓 | 个人网站</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* 粒子背景 */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* 头部样式 */
+        header {
+            text-align: center;
+            padding: 4rem 0;
+            position: relative;
+        }
+
+        .avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 30px #6a11cb;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .avatar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 50px #6a11cb;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #ff8a00, #e52e71, #6a11cb);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+            display: inline-block;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #ff8a00, #e52e71, #6a11cb);
+            border-radius: 3px;
+        }
+
+        .title {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: #a0a0d0;
+        }
+
+        /* 打字机效果 */
+        .typewriter {
+            overflow: hidden;
+            border-right: .15em solid #6a11cb;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .15em;
+            animation: 
+                typing 3.5s steps(40, end),
+                blink-caret .75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #6a11cb; }
+        }
+
+        /* 内容区域 */
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin: 3rem 0;
+        }
+
+        .card {
+            background: rgba(16, 14, 40, 0.7);
+            border-radius: 20px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform: perspective(1000px) rotateY(0deg);
+            transition: transform 0.5s, box-shadow 0.5s;
+        }
+
+        .card:hover {
+            transform: perspective(1000px) rotateY(5deg);
+            box-shadow: 0 15px 40px rgba(106, 17, 203, 0.4);
+        }
+
+        .card h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #e0e0ff;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .card h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #ff8a00, #e52e71);
+            border-radius: 3px;
+        }
+
+        .card p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: #c0c0e0;
+        }
+
+        /* 邮箱按钮样式 */
+        .email-btn {
+            display: inline-block;
+            background: linear-gradient(90deg, #6a11cb, #2575fc);
+            color: white;
+            padding: 15px 35px;
+            font-size: 1.2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            margin-top: 1rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.4);
+            border: none;
+            cursor: pointer;
+        }
+
+        .email-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(106, 17, 203, 0.6);
+            background: linear-gradient(90deg, #2575fc, #6a11cb);
+        }
+
+        .email-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: 0.5s;
+        }
+
+        .email-btn:hover::before {
+            left: 100%;
+        }
+
+        .email-btn i {
+            margin-right: 10px;
+        }
+
+        /* 页脚样式 */
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            color: #a0a0d0;
+            font-size: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .title {
+                font-size: 1.4rem;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+            
+            .card h2 {
+                font-size: 1.8rem;
+            }
+            
+            .card p {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 粒子背景 -->
+    <div id="particles-js"></div>
+    
+    <div class="container">
+        <header>
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="林子卓" class="avatar">
+            <h1>林子卓</h1>
+            <div class="title typewriter">个人网站</div>
+        </header>
+        
+        <div class="content">
+            <div class="card">
+                <h2>关于我</h2>
+                <p>大家好，我是林子卓。这是我的个人网站，很高兴你来到这里。</p>
+                <p>我是一名充满热情的技术爱好者，专注于前沿科技和创新解决方案。在我的职业生涯中，我不断探索新技术，致力于将创意转化为现实。</p>
+                <p>我热爱学习新知识，喜欢挑战自我，并相信技术的力量可以改变世界。</p>
+            </div>
+            
+            <div class="card">
+                <h2>联系方式</h2>
+                <p>如果您有任何问题或想与我交流，请随时通过以下邮箱联系我：</p>
+                <a href="mailto:22551100@zju.edu.cn" class="email-btn">
+                    <i class="fas fa-envelope"></i> 个人邮箱
+                </a>
+                <p style="margin-top: 20px;">期待与您的交流！</p>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2023 林子卓 - 个人网站 | 由激情与代码驱动</p>
+        </footer>
+    </div>
+
+    <!-- 粒子JS库 -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
+    <script>
+        // 粒子背景配置
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": {
+                        "value": 80,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#ffffff"
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.5,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 1,
+                            "opacity_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 2,
+                            "size_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#6a11cb",
+                        "opacity": 0.4,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 1,
+                        "direction": "none",
+                        "random": true,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "grab"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 140,
+                            "line_linked": {
+                                "opacity": 1
+                            }
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+        });
+    </script>
+</body>
+</html>
