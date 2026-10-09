@@ -1,371 +1,213 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>林子卓 | 个人网站</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            color: #fff;
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        /* 粒子背景 */
-        #particles-js {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 1;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* 头部样式 */
-        header {
-            text-align: center;
-            padding: 4rem 0;
-            position: relative;
-        }
-
-        .avatar {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 30px #6a11cb;
-            margin-bottom: 1.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .avatar:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 50px #6a11cb;
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(90deg, #ff8a00, #e52e71, #6a11cb);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            position: relative;
-            display: inline-block;
-        }
-
-        h1::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, #ff8a00, #e52e71, #6a11cb);
-            border-radius: 3px;
-        }
-
-        .title {
-            font-size: 1.8rem;
-            margin-bottom: 2rem;
-            color: #a0a0d0;
-        }
-
-        /* 打字机效果 */
-        .typewriter {
-            overflow: hidden;
-            border-right: .15em solid #6a11cb;
-            white-space: nowrap;
-            margin: 0 auto;
-            letter-spacing: .15em;
-            animation: 
-                typing 3.5s steps(40, end),
-                blink-caret .75s step-end infinite;
-        }
-
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-        }
-
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: #6a11cb; }
-        }
-
-        /* 内容区域 */
-        .content {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            justify-content: center;
-            margin: 3rem 0;
-        }
-
-        .card {
-            background: rgba(16, 14, 40, 0.7);
-            border-radius: 20px;
-            padding: 2rem;
-            width: 100%;
-            max-width: 600px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transform: perspective(1000px) rotateY(0deg);
-            transition: transform 0.5s, box-shadow 0.5s;
-        }
-
-        .card:hover {
-            transform: perspective(1000px) rotateY(5deg);
-            box-shadow: 0 15px 40px rgba(106, 17, 203, 0.4);
-        }
-
-        .card h2 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            color: #e0e0ff;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .card h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(90deg, #ff8a00, #e52e71);
-            border-radius: 3px;
-        }
-
-        .card p {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
-            color: #c0c0e0;
-        }
-
-        /* 邮箱按钮样式 */
-        .email-btn {
-            display: inline-block;
-            background: linear-gradient(90deg, #6a11cb, #2575fc);
-            color: white;
-            padding: 15px 35px;
-            font-size: 1.2rem;
-            text-decoration: none;
-            border-radius: 50px;
-            margin-top: 1rem;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s ease;
-            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.4);
-            border: none;
-            cursor: pointer;
-        }
-
-        .email-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(106, 17, 203, 0.6);
-            background: linear-gradient(90deg, #2575fc, #6a11cb);
-        }
-
-        .email-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            transition: 0.5s;
-        }
-
-        .email-btn:hover::before {
-            left: 100%;
-        }
-
-        .email-btn i {
-            margin-right: 10px;
-        }
-
-        /* 页脚样式 */
-        footer {
-            text-align: center;
-            padding: 2rem 0;
-            margin-top: 3rem;
-            color: #a0a0d0;
-            font-size: 1rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        /* 响应式设计 */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-            
-            .title {
-                font-size: 1.4rem;
-            }
-            
-            .card {
-                padding: 1.5rem;
-            }
-            
-            .card h2 {
-                font-size: 1.8rem;
-            }
-            
-            .card p {
-                font-size: 1.1rem;
-            }
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Zizhuo Lin · 林子卓</title>
+  <meta name="description" content="Zizhuo Lin is a master's student at Zhejiang University working on language model reasoning, on-policy distillation, and multimodal learning.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Zizhuo Lin · 林子卓">
+  <meta property="og:description" content="Master's student at Zhejiang University. Research in language model reasoning, on-policy distillation, and multimodal learning.">
+  <meta property="og:url" content="https://zerovector1201.github.io/ZizhuoLin.github.io/">
+  <link rel="canonical" href="https://zerovector1201.github.io/ZizhuoLin.github.io/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/style.css">
 </head>
-<body>
-    <!-- 粒子背景 -->
-    <div id="particles-js"></div>
-    
-    <div class="container">
-        <header>
-            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="林子卓" class="avatar">
-            <h1>林子卓</h1>
-            <div class="title typewriter">个人网站</div>
-        </header>
-        
-        <div class="content">
-            <div class="card">
-                <h2>关于我</h2>
-                <p>大家好，我是林子卓。这是我的个人网站，很高兴你来到这里。</p>
-                <p>我是一名充满热情的技术爱好者，专注于前沿科技和创新解决方案。在我的职业生涯中，我不断探索新技术，致力于将创意转化为现实。</p>
-                <p>我热爱学习新知识，喜欢挑战自我，并相信技术的力量可以改变世界。</p>
-            </div>
-            
-            <div class="card">
-                <h2>联系方式</h2>
-                <p>如果您有任何问题或想与我交流，请随时通过以下邮箱联系我：</p>
-                <a href="mailto:22551100@zju.edu.cn" class="email-btn">
-                    <i class="fas fa-envelope"></i> 个人邮箱
-                </a>
-                <p style="margin-top: 20px;">期待与您的交流！</p>
-            </div>
+<body id="top">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="page">
+    <header class="site-header">
+      <a class="wordmark" href="#top" aria-label="Zizhuo Lin, home">Zizhuo Lin<span aria-hidden="true">.</span></a>
+      <nav aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#research">Research</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+    <main id="main">
+      <!-- Profile: edit your affiliation, biography, and contact links here. -->
+      <section class="intro" id="about" aria-labelledby="name">
+        <div class="intro-main">
+          <p class="eyebrow">Zhejiang University</p>
+          <h1 id="name">Zizhuo Lin <span lang="zh-CN">林子卓</span></h1>
+          <p class="position">Master’s student · Software Engineering</p>
+          <div class="biography">
+            <p>I am a master’s student in Software Engineering at <a href="https://www.zju.edu.cn/english/">Zhejiang University</a>. Previously, I received my bachelor’s degree in Digital Media Technology from <a href="https://english.neu.edu.cn/">Northeastern University, China</a>.</p>
+            <p>My research focuses on <strong>reasoning and post-training for language models</strong>, with particular interests in on-policy distillation, multi-turn consistency, and grounded multimodal reasoning.</p>
+          </div>
+          <div class="profile-links" aria-label="Profile links">
+            <a href="mailto:linzizhuo1201@gmail.com">Email <span aria-hidden="true">↗</span></a>
+            <a href="https://scholar.google.com/citations?hl=en&amp;user=D-OS9K4AAAAJ">Google Scholar <span aria-hidden="true">↗</span></a>
+            <a href="https://github.com/ZeroVector1201">GitHub <span aria-hidden="true">↗</span></a>
+            <a href="#research">Selected research <span aria-hidden="true">↓</span></a>
+          </div>
         </div>
-        
-        <footer>
-            <p>© 2023 林子卓 - 个人网站 | 由激情与代码驱动</p>
-        </footer>
-    </div>
-
-    <!-- 粒子JS库 -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    
-    <script>
-        // 粒子背景配置
-        document.addEventListener('DOMContentLoaded', function() {
-            particlesJS('particles-js', {
-                "particles": {
-                    "number": {
-                        "value": 80,
-                        "density": {
-                            "enable": true,
-                            "value_area": 800
-                        }
-                    },
-                    "color": {
-                        "value": "#ffffff"
-                    },
-                    "shape": {
-                        "type": "circle",
-                        "stroke": {
-                            "width": 0,
-                            "color": "#000000"
-                        }
-                    },
-                    "opacity": {
-                        "value": 0.5,
-                        "random": true,
-                        "anim": {
-                            "enable": true,
-                            "speed": 1,
-                            "opacity_min": 0.1,
-                            "sync": false
-                        }
-                    },
-                    "size": {
-                        "value": 3,
-                        "random": true,
-                        "anim": {
-                            "enable": true,
-                            "speed": 2,
-                            "size_min": 0.1,
-                            "sync": false
-                        }
-                    },
-                    "line_linked": {
-                        "enable": true,
-                        "distance": 150,
-                        "color": "#6a11cb",
-                        "opacity": 0.4,
-                        "width": 1
-                    },
-                    "move": {
-                        "enable": true,
-                        "speed": 1,
-                        "direction": "none",
-                        "random": true,
-                        "straight": false,
-                        "out_mode": "out",
-                        "bounce": false
-                    }
-                },
-                "interactivity": {
-                    "detect_on": "canvas",
-                    "events": {
-                        "onhover": {
-                            "enable": true,
-                            "mode": "grab"
-                        },
-                        "onclick": {
-                            "enable": true,
-                            "mode": "push"
-                        },
-                        "resize": true
-                    },
-                    "modes": {
-                        "grab": {
-                            "distance": 140,
-                            "line_linked": {
-                                "opacity": 1
-                            }
-                        },
-                        "push": {
-                            "particles_nb": 4
-                        }
-                    }
-                },
-                "retina_detect": true
-            });
-        });
-    </script>
+        <aside class="research-interests" aria-labelledby="interests-title">
+          <h2 id="interests-title">Research interests</h2>
+          <ul>
+            <li><span aria-hidden="true">01</span> Language model reasoning</li>
+            <li><span aria-hidden="true">02</span> On-policy distillation</li>
+            <li><span aria-hidden="true">03</span> Multimodal learning</li>
+          </ul>
+          <p class="interest-note">From model supervision<br>to grounded reasoning.</p>
+        </aside>
+      </section>
+      <!-- Research: keep venue/status accurate. Add real Paper/Code links when public. -->
+      <section class="research section" id="research" aria-labelledby="research-title">
+        <div class="section-heading">
+          <h2 id="research-title">Selected Research</h2>
+          <span class="section-note">Publications &amp; manuscripts</span>
+        </div>
+        <article class="paper" aria-labelledby="tom-title">
+          <figure class="paper-figure">
+            <a class="figure-link" href="assets/figures/tom-video.png" target="_blank" rel="noopener" aria-label="View ToM-Video Figure 1 at full size (opens in a new tab)">
+              <img src="assets/figures/tom-video-preview.png" width="760" height="550" loading="lazy" decoding="async" alt="ToM-Video overview: video evidence connects observations to beliefs, intentions, and other mental states.">
+            </a>
+            <figcaption>Benchmark overview <span>Fig. 1 <span aria-hidden="true">↗</span></span></figcaption>
+          </figure>
+          <div class="paper-body">
+            <p class="paper-status accepted">EMNLP 2026 Main · Accepted</p>
+            <h3 id="tom-title">ToM-Video: A Theory-of-Mind Video Benchmark with Spatio-Temporal Grounded Reasoning</h3>
+            <p class="authorship"><strong>Zizhuo Lin</strong> · Co-first author</p>
+            <p class="paper-description">Understanding beliefs and intentions in video through explicit spatial and temporal evidence.</p>
+            <details>
+              <summary>Method &amp; results</summary>
+              <div class="paper-details">
+                <p>ToM-Video includes 1,487 source videos, 4,666 clips, and approximately 41,000 question–answer pairs, with timestamps, key-frame bounding boxes, and evidence chains. INSPIRE combines supervised fine-tuning with grounding and theory-of-mind reinforcement learning.</p>
+                <p>Qwen3-VL-8B achieves <strong>76.2%</strong> on the ToM-Video validation set, a 5.4 percentage-point improvement over the SFT stage. Social-IQ 2.0 accuracy improves from 63.41% to 65.12%.</p>
+              </div>
+            </details>
+          </div>
+        </article>
+        <article class="paper" aria-labelledby="td-title">
+          <figure class="paper-figure">
+            <a class="figure-link" href="assets/figures/trajectory-dropout.png" target="_blank" rel="noopener" aria-label="View Trajectory Dropout Figure 1 at full size (opens in a new tab)">
+              <img src="assets/figures/trajectory-dropout-preview.png" width="652" height="450" loading="lazy" decoding="async" alt="Trajectory Dropout strengthens learning signals by reducing confidence saturation and teacher–student agreement saturation.">
+            </a>
+            <figcaption>Trajectory Dropout <span>Fig. 1 <span aria-hidden="true">↗</span></span></figcaption>
+          </figure>
+          <div class="paper-body">
+            <p class="paper-status">Under review</p>
+            <h3 id="td-title">What Shared Prefixes Hide: Trajectory Dropout for On-Policy Distillation</h3>
+            <p class="authorship"><strong>Zizhuo Lin</strong> · First author</p>
+            <p class="paper-description">Strengthening token-level supervision by selectively masking the student’s shared reasoning prefix.</p>
+            <details>
+              <summary>Method &amp; results</summary>
+              <div class="paper-details">
+                <p>Trajectory Dropout addresses weak supervision caused by highly confident predictions and teacher–student agreement on shared prefixes. It masks 20% of the student’s historical segments during training while retaining the teacher’s full context.</p>
+                <p>With Qwen3-4B-Instruct-2507 as teacher and Qwen3-1.7B as student in non-thinking mode, average accuracy across six mathematical benchmarks improves from <strong>28.27% to 32.78%</strong> over OPD; GPQA Diamond improves from 31.57% to 35.73%.</p>
+              </div>
+            </details>
+          </div>
+        </article>
+        <article class="paper" aria-labelledby="ccopd-title">
+          <figure class="paper-figure">
+            <a class="figure-link" href="assets/figures/ccopd.png" target="_blank" rel="noopener" aria-label="View CCOPD Figure 3 at full size (opens in a new tab)">
+              <img src="assets/figures/ccopd-preview.png" width="750" height="347" loading="lazy" decoding="async" alt="CCOPD method: a frozen full-context teacher supervises a multi-turn student with answer-masked, same-prefix reverse-KL distillation.">
+            </a>
+            <figcaption>CCOPD method overview <span>Fig. 3 <span aria-hidden="true">↗</span></span></figcaption>
+          </figure>
+          <div class="paper-body">
+            <p class="paper-status">Under review</p>
+            <h3 id="ccopd-title">Same Evidence, Different Answers: Canonical-Context On-Policy Distillation for Multi-Turn Language Models</h3>
+            <p class="authorship"><strong>Zizhuo Lin</strong> · First author</p>
+            <p class="paper-description">Improving answer consistency when the same evidence is presented across multiple conversation turns.</p>
+            <details>
+              <summary>Method &amp; results</summary>
+              <div class="paper-details">
+                <p>CCOPD uses a frozen model with the complete context to supervise a multi-turn student through token-level reverse-KL distillation. Qwen3-8B is trained with LoRA on 6,000 paired mathematical conversations.</p>
+                <p>Multi-turn mathematical accuracy improves from <strong>66.0% to 82.5%</strong>, while full-context accuracy remains at 90.3%. With mathematics-only training, the average score across five non-mathematical out-of-domain tasks improves from 36.8 to 49.7.</p>
+              </div>
+            </details>
+          </div>
+        </article>
+      </section>
+      <section class="collaborations section" id="collaborations" aria-labelledby="collaborations-title">
+        <div class="section-heading">
+          <h2 id="collaborations-title">Collaborative Research</h2>
+          <a class="section-note" href="https://scholar.google.com/citations?hl=en&amp;user=D-OS9K4AAAAJ">All publications on Google Scholar <span aria-hidden="true">↗</span></a>
+        </div>
+        <article class="paper" aria-labelledby="part-x-title">
+          <figure class="paper-figure">
+            <a class="figure-link" href="assets/figures/part-x-mllm.png" target="_blank" rel="noopener" aria-label="View Part-X-MLLM Figure 1 at full size (opens in a new tab)">
+              <img src="assets/figures/part-x-mllm-preview.png" width="788" height="444" loading="lazy" decoding="async" alt="Part-X-MLLM examples of part-level grounding, captioning, 3D generation, and editing.">
+            </a>
+            <figcaption>Part-aware 3D understanding <span>Fig. 1 <span aria-hidden="true">↗</span></span></figcaption>
+          </figure>
+          <div class="paper-body">
+            <p class="paper-status accepted">ICLR 2026</p>
+            <h3 id="part-x-title">Part-X-MLLM: Part-aware 3D Multimodal Large Language Model</h3>
+            <p class="authorship">Chunshi Wang, Junliang Ye, Yunhan Yang, Yang Li, <strong>Zizhuo Lin</strong>, Jun Zhu, Zhuo Chen, Yawei Luo, Chunchao Guo</p>
+            <p class="paper-description">A native 3D multimodal language model that unifies part-level understanding, generation, and editing through structured, executable programs.</p>
+            <div class="paper-links" aria-label="Part-X-MLLM resources">
+              <a href="https://proceedings.iclr.cc/paper_files/paper/2026/file/f38cb4cf9a5eaa92b3cfa481832719c6-Paper-Conference.pdf">Paper <span aria-hidden="true">↗</span></a>
+              <a href="https://chunshi.wang/Part-X-MLLM/">Project <span aria-hidden="true">↗</span></a>
+              <a href="https://github.com/AiEson/Part-X-MLLM">Repository <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </article>
+        <article class="paper" aria-labelledby="particlegs-title">
+          <figure class="paper-figure">
+            <a class="figure-link" href="assets/figures/particlegs.png" target="_blank" rel="noopener" aria-label="View ParticleGS Figure 2 at full size (opens in a new tab)">
+              <img src="assets/figures/particlegs-preview.png" width="829" height="337" loading="lazy" decoding="async" alt="ParticleGS framework with a dynamics encoder, neural ODE evolver, and Gaussian decoder for future motion prediction.">
+            </a>
+            <figcaption>ParticleGS framework <span>Fig. 2 <span aria-hidden="true">↗</span></span></figcaption>
+          </figure>
+          <div class="paper-body">
+            <p class="paper-status accepted">CVPR 2026 · Highlight</p>
+            <h3 id="particlegs-title">ParticleGS: Learning Neural Gaussian Particle Dynamics from Videos for Prior-free Physical Motion Extrapolation</h3>
+            <p class="authorship">Jinsheng Quan, Qiaowei Miao, Yichao Xu, <strong>Zizhuo Lin</strong>, Ying Li, Wei Yang, Zhihui Li, Yawei Luo</p>
+            <p class="paper-description">Learning continuous-time particle dynamics from videos to extrapolate 3D motion beyond the observed frames, without predefined physical equations.</p>
+            <div class="paper-links" aria-label="ParticleGS resources">
+              <a href="https://openaccess.thecvf.com/content/CVPR2026/papers/Quan_ParticleGS_Learning_Neural_Gaussian_Particle_Dynamics_from_Videos_for_Prior-free_CVPR_2026_paper.pdf">Paper <span aria-hidden="true">↗</span></a>
+              <a href="https://github.com/QuanJinSheng/ParticleGS">Code <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </article>
+      </section>
+      <div class="background-grid">
+        <section class="section" id="education" aria-labelledby="education-title">
+          <div class="section-heading"><h2 id="education-title">Education</h2></div>
+          <div class="education-entry">
+            <p class="date">Sep 2025 — Jun 2028 <span>(expected)</span></p>
+            <h3>Zhejiang University</h3>
+            <p>Master’s in Software Engineering</p>
+            <p class="muted">School of Software Technology</p>
+          </div>
+          <div class="education-entry">
+            <p class="date">Sep 2021 — Jun 2025</p>
+            <h3>Northeastern University, China</h3>
+            <p>Bachelor’s in Digital Media Technology</p>
+            <p class="muted">Software College</p>
+          </div>
+        </section>
+        <section class="section honors" aria-labelledby="honors-title">
+          <div class="section-heading"><h2 id="honors-title">Selected Honors</h2></div>
+          <div class="honor-entry">
+            <h3>National Scholarship</h3>
+            <p>Three-time recipient</p>
+            <p class="muted">Northeastern University</p>
+          </div>
+          <div class="honor-entry">
+            <h3>Chiang Chen Scholarship <span lang="zh-CN">蒋震奖学金</span></h3>
+            <p class="muted">Zhejiang University</p>
+          </div>
+        </section>
+      </div>
+      <section class="contact section" id="contact" aria-labelledby="contact-title">
+        <div>
+          <h2 id="contact-title">Get in touch</h2>
+          <p>For research discussions and collaboration, feel free to email me.</p>
+        </div>
+        <a class="contact-email" href="mailto:linzizhuo1201@gmail.com">linzizhuo1201@gmail.com <span aria-hidden="true">↗</span></a>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <p>© 2026 Zizhuo Lin <span lang="zh-CN">林子卓</span></p>
+      <p>Updated October 2026 <span aria-hidden="true">·</span> <a href="https://github.com/ZeroVector1201/ZizhuoLin.github.io">Source</a></p>
+    </footer>
+  </div>
 </body>
 </html>

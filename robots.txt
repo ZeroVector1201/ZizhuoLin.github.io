@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://zerovector1201.github.io/ZizhuoLin.github.io/sitemap.xml
