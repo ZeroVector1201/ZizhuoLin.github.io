@@ -9,12 +9,13 @@
 - `index.html`：个人简介、联系方式、研究、教育背景与荣誉。
 - `assets/style.css`：字体、颜色、间距与移动端布局。
 - `assets/favicon.svg`：浏览器图标。
+- `assets/profile.jpg`：本人提供的个人照片；桌面端显示在简介右侧，手机端显示在姓名上方。
 - `assets/figures/`：五篇论文的主图与预览缩略图（CCOPD 使用第 5 页 Figure 3，ParticleGS 使用第 3 页 Figure 2，其余使用 Figure 1）；图源与裁切信息见 `assets/figures/SOURCES.md`。
 - `sitemap.xml`：更新页面时同步修改 `lastmod`。
 
 内容依据工作区的本人简历整理。论文作者角色与状态沿用该简历；页面中的姓名行用于说明本人贡献角色，不是完整作者名单。论文公开后，可在对应 `article` 中补充完整作者与 Paper / Code 链接。
 
-当前版本使用英文正文与中文姓名；ToM-Video 显示 EMNLP 2026 Main 已录用，Trajectory Dropout 和 CCOPD 统一显示 Under review。未填入未提供的导师或个人照片。
+当前版本使用英文正文与中文姓名；ToM-Video 显示 EMNLP 2026 Main 已录用，Trajectory Dropout 和 CCOPD 统一显示 Under review。未填入未提供的导师信息。个人照片于 2026-10-20 加入，使用本人提供的照片原文件，由 CSS 控制显示比例。
 
 2026-10-09 根据本人 [Google Scholar](https://scholar.google.com/citations?hl=zh-CN&user=D-OS9K4AAAAJ) 列表补入两篇合作论文：Part-X-MLLM（ICLR 2026）与 ParticleGS（CVPR 2026 Highlight）。作者顺序、年份和标题与官方论文交叉核对，Highlight 标记依据作者官方代码仓库。完整来源见 `PUBLICATION-SOURCES.md`。个人信息区同步加入 Google Scholar 链接。
 
